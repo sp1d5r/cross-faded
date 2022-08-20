@@ -16,13 +16,6 @@ if (context === null || root === null) {
 
 root.appendChild(canvas);
 
-context.fillStyle = "rgb(0, 255, 0)";
-
-context.beginPath();
-context.arc(200, 200, 30, 0, 2 * Math.PI);
-context.closePath();
-context.fill();
-
 class Game {
   start = new Date().getTime();
   player: Player = new Player();
@@ -30,7 +23,8 @@ class Game {
   tick() {
     this.player.update();
 
-    this.player.render();
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    this.player.render(context);
   }
 }
 
