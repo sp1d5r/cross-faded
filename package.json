@@ -1,0 +1,23 @@
+{
+  "name": "cross-faded",
+  "version": "1.0.0",
+  "description": "cross-faded game",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sp1d5r/cross-faded.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sp1d5r/cross-faded/issues"
+  },
+  "homepage": "https://github.com/sp1d5r/cross-faded#readme",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}

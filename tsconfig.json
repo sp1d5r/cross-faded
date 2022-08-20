@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "es2018",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "rootDir": "./src",
+      "outDir": "./dist",
+      "noEmitOnError": true,
+      "strict": false,
+      "noUnusedLocals": false,
+      "pretty": true
+    },
+    "exclude": ["node_modules", "dist"]
+  }
