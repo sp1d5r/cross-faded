@@ -7,6 +7,8 @@ export class Grid extends Entity {
   private speed: number;
   private columns: Block[][];
   private blockSize: number;
+  private canvasHeight: number;
+  private canvasWidth: number;
 
   constructor(canvasHeight: number, canvasWidth: number) {
     super();
@@ -14,6 +16,8 @@ export class Grid extends Entity {
     this.speed = 0;
     this.columns = [];
     this.blockSize = this._getBlockSize(canvasHeight);
+    this.canvasHeight = canvasHeight;
+    this.canvasWidth = canvasWidth;
     this.appendColumn();
   }
 
@@ -30,12 +34,14 @@ export class Grid extends Entity {
   /* Column manipulation */
   appendColumn() {
     /* Add columns to the back of the grid */
-    let pos = 0;
+    let y_pos = 0;
+    let x_pos = this.canvasWidth;
+    console.log()
     let rows: Block[] = [];
     for (let i = 0; i < BLOCKS_NUMBER; i++) {
-      const block = new Block(0, pos, this.blockSize);
+      const block = new Block(x_pos, y_pos, this.blockSize);
       rows.push(block)
-      pos += this.blockSize + 2;
+      y_pos += this.blockSize + 2;
     }
     this.columns.push(rows);
   }
@@ -48,6 +54,14 @@ export class Grid extends Entity {
 
   update() {
     /* Update the elements in the grid */
+    for (var i = 0; i < this.columns.length; i++) {
+      let column = this.columns[i];
+      for (var j = 0; j < column.length; j++){
+        /* For each Block */
+        let block = column[j];
+        block.update();
+      }
+    }
   }
 
   render(context: CanvasRenderingContext2D) {

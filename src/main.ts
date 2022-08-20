@@ -20,9 +20,9 @@ root.appendChild(canvas);
 class Game {
   start = new Date().getTime();
   player: Player = new Player();
-  canvasHeight : number = canvas.clientHeight;
-  canvasWidth : number = canvas.clientWidth;
-  grid: Grid = new Grid(this.canvasHeight, this.canvasHeight);
+  canvasHeight : number = canvas.height;
+  canvasWidth : number = canvas.width;
+  grid: Grid = new Grid(this.canvasHeight, this.canvasWidth);
   tick() {
     this.player.update();
     this.grid.update();

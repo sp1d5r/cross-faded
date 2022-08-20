@@ -21,6 +21,7 @@ export class Block extends Entity {
 
     update() {
         /* Update the elements for the player */
+        this.updatePostiion(-5, 0);
     }
 
     render(context: CanvasRenderingContext2D) {
