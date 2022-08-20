@@ -7,19 +7,19 @@ export class Player extends Entity {
   private radius: number;
 
   private oscillationAngle: number;
-  private oscillationStep: number;
+  private oscillationFrequency: number;
   private oscillationRadius: number;
 
   constructor() {
     super();
     /* This will initialise variables */
 
-    this.position = new Vector(50, 50);
+    this.position = new Vector(50, 100);
 
     this.radius = 10;
 
     this.oscillationAngle = 0;
-    this.oscillationStep = 20;
+    this.oscillationFrequency = 1 / 20;
     this.oscillationRadius = 10;
   }
 
@@ -29,7 +29,7 @@ export class Player extends Entity {
     /* Update the elements for the player */
 
     this.oscillationAngle =
-      this.oscillationAngle + (2 * Math.PI) / this.oscillationStep;
+      this.oscillationAngle + 2 * Math.PI * this.oscillationFrequency;
     if (this.oscillationAngle >= 2 * Math.PI) {
       this.oscillationAngle -= 2 * Math.PI;
     }
