@@ -1,15 +1,12 @@
 {
     "compilerOptions": {
-      "target": "es2018",
-      "module": "commonjs",
-      "moduleResolution": "node",
+      "outDir": "./dist/",
       "sourceMap": true,
-      "rootDir": "./src",
-      "outDir": "./dist",
-      "noEmitOnError": true,
-      "strict": false,
-      "noUnusedLocals": false,
-      "pretty": true
-    },
-    "exclude": ["node_modules", "dist"]
+      "noImplicitAny": true,
+      "module": "es6",
+      "target": "es5",
+      "jsx": "react",
+      "allowJs": true,
+      "moduleResolution": "node"
+    }
   }

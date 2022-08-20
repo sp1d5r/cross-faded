@@ -1,3 +1,4 @@
+import "./style.css";
 import { Player } from "./entities/player/player";
 
 // https://medium.com/@KevinBGreene/lets-write-a-physics-based-game-in-typescript-part-1-game-loop-and-simple-physics-4b4cbc0bbdce
