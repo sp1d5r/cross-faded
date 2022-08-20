@@ -21,8 +21,14 @@ root.appendChild(canvas);
 class Game {
   start = new Date().getTime();
   player: Player = new Player();
+<<<<<<< HEAD
   background: Background = new Background();
   grid: Grid = new Grid();
+=======
+  canvasHeight : number = canvas.height;
+  canvasWidth : number = canvas.width;
+  grid: Grid = new Grid(this.canvasHeight, this.canvasWidth);
+>>>>>>> 1c3bb9a292ec5ff72469c8ce464e8199ede26143
   tick() {
     this.player.update();
     this.grid.update();
