@@ -1,22 +1,16 @@
 import { Vector } from "../../lib/vector";
 import { Entity } from "../entities";
 
-const canvas: HTMLCanvasElement = document.createElement("canvas");
-const context: CanvasRenderingContext2D | null = canvas.getContext("2d");
-
 export class Block extends Entity {
     private position: Vector;
+    private size: number;
 
-    constructor(x:number, y:number) {
+    constructor(x:number, y:number, size: number) {
         super();
         /* This will initialise variables */
         this.position = new Vector(x, y);
-        context.fillStyle = "rgb(0, 0, 0)";
-        context.beginPath();
-        context.fillRect(this.position.getX(), this.position.getY(), 1000, 1000);
-        context.closePath();
-        context.fill();
-        console.log("here")
+        this.size = size;
+        console.log(size)
     }
 
     /* Update and Render */
@@ -29,7 +23,8 @@ export class Block extends Entity {
         /* Update the elements for the player */
     }
 
-    render() {
+    render(context: CanvasRenderingContext2D) {
         /* Render the changes made */
+        context.fillRect(this.position.getX(), this.position.getY(), this.size, this.size);
     }
 }

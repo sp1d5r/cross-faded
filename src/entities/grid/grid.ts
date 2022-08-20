@@ -1,18 +1,27 @@
 import { Entity } from "../entities";
 import {Block} from "../block/block";
 
+const BLOCKS_HEIGHT = 30;
+
 export class Grid extends Entity {
   private speed: number;
   private columns: any[];
+  private blockSize: number;
 
   constructor() {
     super();
     /* This will initialise variables and grid */
     this.speed = 0;
     this.columns = [];
+    this.blockSize = this._getBlockSize();
     this.appendColumn();
   }
 
+  _getBlockSize(): number {
+    /* Generate the height and width of a block relative to the canvas size */
+    const canvasHeight : number = document.getElementsByTagName("canvas")[0].clientHeight;
+    return canvasHeight / BLOCKS_HEIGHT;
+  }
   _setSpeed(speed: number) {
     this.speed = speed;
   }
@@ -20,7 +29,7 @@ export class Grid extends Entity {
   /* Column manipulation */
   appendColumn() {
     /* Add columns to the back of the grid */
-    const block = new Block(10, 10);
+    const block = new Block(10, 10, this.blockSize);
     this.columns.push(block);
   }
 
@@ -36,5 +45,6 @@ export class Grid extends Entity {
 
   render(context: CanvasRenderingContext2D) {
     /* Render the changes made */
+    this.columns[0].render(context);
   }
 }
