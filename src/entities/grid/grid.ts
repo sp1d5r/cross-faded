@@ -1,27 +1,28 @@
 import { Entity } from "../entities";
 import {Block} from "../block/block";
 
-const BLOCKS_HEIGHT = 30;
+const BLOCKS_NUMBER = 30;
 
 export class Grid extends Entity {
   private speed: number;
-  private columns: any[];
+  private columns: Block[][];
   private blockSize: number;
 
-  constructor() {
+  constructor(canvasHeight: number, canvasWidth: number) {
     super();
     /* This will initialise variables and grid */
     this.speed = 0;
     this.columns = [];
-    this.blockSize = this._getBlockSize();
+    this.blockSize = this._getBlockSize(canvasHeight);
     this.appendColumn();
   }
 
-  _getBlockSize(): number {
+  _getBlockSize(canvasHeight: number): number {
     /* Generate the height and width of a block relative to the canvas size */
-    const canvasHeight : number = document.getElementsByTagName("canvas")[0].clientHeight;
-    return canvasHeight / BLOCKS_HEIGHT;
+    let availableHeight = canvasHeight -  BLOCKS_NUMBER*2;
+    return availableHeight / BLOCKS_NUMBER;
   }
+
   _setSpeed(speed: number) {
     this.speed = speed;
   }
@@ -29,8 +30,14 @@ export class Grid extends Entity {
   /* Column manipulation */
   appendColumn() {
     /* Add columns to the back of the grid */
-    const block = new Block(10, 10, this.blockSize);
-    this.columns.push(block);
+    let pos = 0;
+    let rows: Block[] = [];
+    for (let i = 0; i < BLOCKS_NUMBER; i++) {
+      const block = new Block(0, pos, this.blockSize);
+      rows.push(block)
+      pos += this.blockSize + 2;
+    }
+    this.columns.push(rows);
   }
 
   removeColumn() {
@@ -45,6 +52,11 @@ export class Grid extends Entity {
 
   render(context: CanvasRenderingContext2D) {
     /* Render the changes made */
-    this.columns[0].render(context);
+    for (var i = 0; i < this.columns.length; i++) {
+      let column = this.columns[i];
+      for (var j = 0; j < column.length; j++){
+        column[j].render(context);
+      }
+    }
   }
 }
