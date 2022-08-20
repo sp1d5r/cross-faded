@@ -1,8 +1,6 @@
 import { Entity } from "../entities";
 import {Block} from "../block/block";
 
-interface Column {}
-
 export class Grid extends Entity {
   private speed: number;
   private columns: any[];
@@ -36,7 +34,7 @@ export class Grid extends Entity {
     /* Update the elements in the grid */
   }
 
-  render() {
+  render(context: CanvasRenderingContext2D) {
     /* Render the changes made */
   }
 }

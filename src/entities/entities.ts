@@ -1,4 +1,4 @@
 export abstract class Entity {
   abstract update(): void;
-  abstract render(): void;
+  abstract render(context: CanvasRenderingContext2D): void;
 }
