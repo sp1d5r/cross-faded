@@ -1,4 +1,5 @@
 import { Entity } from "../entities";
+import {Block} from "../block/block";
 
 interface Column {}
 
@@ -11,6 +12,7 @@ export class Grid extends Entity {
     /* This will initialise variables and grid */
     this.speed = 0;
     this.columns = [];
+    this.appendColumn();
   }
 
   _setSpeed(speed: number) {
@@ -20,6 +22,8 @@ export class Grid extends Entity {
   /* Column manipulation */
   appendColumn() {
     /* Add columns to the back of the grid */
+    const block = new Block(10, 10);
+    this.columns.push(block);
   }
 
   removeColumn() {
