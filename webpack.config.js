@@ -27,6 +27,11 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      { test: /\.svg$/, loader: 'svg-inline-loader' }
     ],
   },
   resolve: {
@@ -36,7 +41,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash:8].js',
   sourceMapFilename: '[name].[hash:8].map',
-  chunkFilename: '[id].[hash:8].js'
+  chunkFilename: '[id].[hash:8].js',
+  clean: true,
+  publicPath: '/'
   },
   optimization: {
     runtimeChunk: 'single',
