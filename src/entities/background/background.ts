@@ -64,7 +64,10 @@ export class Background extends Entity {
   update(): void {
     this.images.forEach((img) => {
       img.update();
-      if (img.getPosition().getX() <= -img.getDimensions().getX()) {
+      if (
+        img.getPosition() !== null &&
+        img.getPosition().getX() <= -img.getDimensions().getX()
+      ) {
         img.setPosition(new Vector(this.canvasWidth, img.getPosition().getY()));
       }
     });
