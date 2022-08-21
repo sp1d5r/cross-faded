@@ -6,6 +6,7 @@ export class Block extends Entity {
     private size: number;
     private initialPosition: Vector;
     private active: boolean;
+    private probability: number;
 
     constructor(x:number, y:number, size: number, canvasWidth: number) {
         super();
@@ -13,12 +14,14 @@ export class Block extends Entity {
         this.initialPosition = new Vector(canvasWidth, y)
         this.position = new Vector(x, y);
         this.size = size;
-        this.active = Math.floor(Math.random() * 100) < 10;
+        this.active = Math.floor(Math.random() * 100) < 2;
+        this.probability = 2; /* % a tile becomes active*/
     }
 
     _initialseAgain(diff: number) {
         this.position = new Vector(this.initialPosition.getX() + diff, this.initialPosition.getY());
-        this.active = Math.floor(Math.random() * 100) < 10;
+        this.probability += 2;
+        this.active = Math.floor(Math.random() * 100) < this.probability;
     }
 
 
