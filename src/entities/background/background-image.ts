@@ -38,14 +38,14 @@ export class BackgroundImage extends Entity {
   }
 
   update(): void {
-    if (this.position === null)
-      throw new Error("Update called before image loaded");
+    if (this.position === null) return;
+    // throw new Error("Update called before image loaded");
     this.position.add(this.speed);
   }
 
   render(context: CanvasRenderingContext2D): void {
-    if (this.position === null)
-      throw new Error("Update called before image loaded");
+    if (this.position === null) return;
+    // throw new Error("Update called before image loaded");
     context.drawImage(
       this.image,
       this.position.getX(),
