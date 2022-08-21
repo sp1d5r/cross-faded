@@ -23,11 +23,12 @@ export class Grid extends Entity {
   }
 
   _getGridWidth(): number {
-    return this.canvasWidth % (this.blockSize);
+    return Math.floor(this.canvasWidth / (this.blockSize + 1));
   }
 
   initialseGrid() {
     let gridWidth = this._getGridWidth();
+    console.log(gridWidth);
     let xPosition = this.canvasWidth;
     for (let cols=0; cols < gridWidth; cols++){
       this.appendColumn(xPosition)
@@ -88,7 +89,6 @@ export class Grid extends Entity {
 
   render(context: CanvasRenderingContext2D) {
     /* Render the changes made */
-    context.fillStyle= "rgba(255,255,255, 0.05)";
     for (var i = 0; i < this.columns.length; i++) {
       let column = this.columns[i];
       for (var j = 0; j < column.length; j++){
