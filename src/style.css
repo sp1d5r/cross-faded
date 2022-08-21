@@ -1,3 +1,8 @@
 #root {
     background-color: slategrey;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+}
