@@ -23,6 +23,18 @@ export class Player extends Entity {
     this.oscillationRadius = 10;
   }
 
+  getY():number{
+    return this.position.getY();
+  }
+
+  getX():number{
+    return this.position.getX();
+  }
+
+  getRadius(): number {
+    return this.radius;
+  }
+
   /* Update and Render */
 
   update() {

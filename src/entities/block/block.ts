@@ -39,6 +39,10 @@ export class Block extends Entity {
         this.position.add(new Vector(x, y));
     }
 
+    isActive() {
+        return this.active;
+    }
+
     update() {
         if (this.position.getX() < - this.size){
             let diff = this.size + this.position.getX();

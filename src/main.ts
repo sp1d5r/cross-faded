@@ -27,6 +27,9 @@ class Game {
   grid: Grid = new Grid(this.canvasHeight, this.canvasWidth);
   tick() {
     this.player.update();
+    if (this.grid.checkColision(this.player)) {
+      return;
+    }
     this.grid.update();
     this.background.update();
 
