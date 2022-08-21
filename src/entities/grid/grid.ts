@@ -47,7 +47,6 @@ export class Grid extends Entity {
 
   /* Column manipulation */
   appendColumn(xPosition ?: number) {
-    console.log("xpos", xPosition);
     let x_pos = (typeof xPosition === undefined) ? this.canvasWidth : xPosition
     /* Add columns to the back of the grid */
     let y_pos = 0;
@@ -56,9 +55,7 @@ export class Grid extends Entity {
     });;
     let rows: Block[] = [];
     for (let i = 0; i < BLOCKS_NUMBER; i++) {
-      console.log("xpos", x_pos)
-      const block = new Block(x_pos, y_pos, this.blockSize);
-      console.log("created a new blook")
+      const block = new Block(x_pos, y_pos, this.blockSize, this.canvasWidth);
       rows.push(block)
       y_pos += this.blockSize + 2;
     }
@@ -91,7 +88,7 @@ export class Grid extends Entity {
 
   render(context: CanvasRenderingContext2D) {
     /* Render the changes made */
-    context.fillStyle= "rgba(255,255,255, 0.2)";
+    context.fillStyle= "rgba(255,255,255, 0.05)";
     for (var i = 0; i < this.columns.length; i++) {
       let column = this.columns[i];
       for (var j = 0; j < column.length; j++){

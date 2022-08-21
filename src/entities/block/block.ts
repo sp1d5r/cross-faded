@@ -6,10 +6,10 @@ export class Block extends Entity {
     private size: number;
     private initialPosition: Vector;
 
-    constructor(x:number, y:number, size: number) {
+    constructor(x:number, y:number, size: number, canvasWidth: number) {
         super();
         /* This will initialise variables */
-        this.initialPosition = new Vector(x, y)
+        this.initialPosition = new Vector(canvasWidth, y)
         this.position = new Vector(x, y);
         this.size = size;
     }
@@ -30,11 +30,12 @@ export class Block extends Entity {
 
     update() {
         if (this.position.getX() < - this.size){
-            console.log(this.initialPosition)
-            this.position = new Vector(this.initialPosition.getX(), this.initialPosition.getY());
+            let diff = this.size + this.position.getX();
+            this.position = new Vector(this.initialPosition.getX() + diff, this.initialPosition.getY());
+        } else {
+            /* Update the elements for the player */
+            this.updatePostiion(-4, 0);
         }
-        /* Update the elements for the player */
-        this.updatePostiion(-5, 0);
     }
 
     render(context: CanvasRenderingContext2D) {

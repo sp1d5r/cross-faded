@@ -35,6 +35,7 @@ class Game {
     this.background.render(context);
     this.grid.render(context);
     this.player.render(context);
+    requestAnimationFrame(()=> this.tick());
   }
 
   clearCanvas(): void {
@@ -44,7 +45,5 @@ class Game {
 
 const game = new Game();
 
-setInterval(function () {
-  console.log("running");
-  game.tick();
-}, 40);
+
+requestAnimationFrame(() => {game.tick()})
