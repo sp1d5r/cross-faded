@@ -1,5 +1,5 @@
 import { Entity } from "../entities";
-import { Block } from "../block/block";
+import {Block} from "../block/block";
 
 const BLOCKS_NUMBER = 30;
 
@@ -18,12 +18,27 @@ export class Grid extends Entity {
     this.blockSize = this._getBlockSize(canvasHeight);
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
+    this.initialseGrid();
     this.appendColumn();
+  }
+
+  _getGridWidth(): number {
+    return Math.floor(this.canvasWidth / (this.blockSize + 1));
+  }
+
+  initialseGrid() {
+    let gridWidth = this._getGridWidth();
+    console.log(gridWidth);
+    let xPosition = this.canvasWidth;
+    for (let cols=0; cols < gridWidth; cols++){
+      this.appendColumn(xPosition)
+      xPosition = xPosition + (this.blockSize+2);
+    }
   }
 
   _getBlockSize(canvasHeight: number): number {
     /* Generate the height and width of a block relative to the canvas size */
-    let availableHeight = canvasHeight - BLOCKS_NUMBER * 2;
+    let availableHeight = canvasHeight -  BLOCKS_NUMBER*2;
     return availableHeight / BLOCKS_NUMBER;
   }
 
@@ -32,31 +47,39 @@ export class Grid extends Entity {
   }
 
   /* Column manipulation */
-  appendColumn() {
+  appendColumn(xPosition ?: number) {
+    let x_pos = (typeof xPosition === undefined) ? this.canvasWidth : xPosition
     /* Add columns to the back of the grid */
     let y_pos = 0;
-    let x_pos = this.canvasWidth;
-    console.log();
+    let tempCols = this.columns.map(function(arr) {
+      return arr.slice();
+    });;
     let rows: Block[] = [];
     for (let i = 0; i < BLOCKS_NUMBER; i++) {
-      const block = new Block(x_pos, y_pos, this.blockSize);
-      rows.push(block);
+      const block = new Block(x_pos, y_pos, this.blockSize, this.canvasWidth);
+      rows.push(block)
       y_pos += this.blockSize + 2;
     }
-    this.columns.push(rows);
+    tempCols.push(rows)
+    this.columns = tempCols;
   }
 
   removeColumn() {
     /* Remove columns from the front of the grid */
+    let [first, ... rest] = this.columns;
+    this.columns = rest;
   }
+
 
   /* Update and Render */
 
   update() {
     /* Update the elements in the grid */
+    /* Determine how to do this with a dynamically changing array*/
+
     for (var i = 0; i < this.columns.length; i++) {
-      let column = this.columns[i];
-      for (var j = 0; j < column.length; j++) {
+      let column = this.columns[i]
+      for (var j = 0; j < column.length; j++){
         /* For each Block */
         let block = column[j];
         block.update();
@@ -65,11 +88,10 @@ export class Grid extends Entity {
   }
 
   render(context: CanvasRenderingContext2D) {
-    context.fillStyle = "rgb(0, 0, 255)";
     /* Render the changes made */
     for (var i = 0; i < this.columns.length; i++) {
       let column = this.columns[i];
-      for (var j = 0; j < column.length; j++) {
+      for (var j = 0; j < column.length; j++){
         column[j].render(context);
       }
     }
