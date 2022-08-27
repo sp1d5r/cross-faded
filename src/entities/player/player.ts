@@ -1,14 +1,13 @@
 import { Vector } from "../../lib/vector";
 import { Entity } from "../entities";
+import { Oscillator } from "../util/oscillator";
 
 export class Player extends Entity {
   private position: Vector;
 
   private radius: number;
 
-  private oscillationAngle: number;
-  private oscillationFrequency: number;
-  private oscillationRadius: number;
+  private oscillator: Oscillator;
 
   constructor() {
     super();
@@ -18,9 +17,7 @@ export class Player extends Entity {
 
     this.radius = 10;
 
-    this.oscillationAngle = 0;
-    this.oscillationFrequency = 1 / 20;
-    this.oscillationRadius = 5;
+    this.oscillator = new Oscillator(5, 1 / 20, 0);
   }
 
   getY(): number {
@@ -43,16 +40,9 @@ export class Player extends Entity {
 
   update() {
     /* Update the elements for the player */
+    this.oscillator.update();
 
-    this.oscillationAngle =
-      this.oscillationAngle + 2 * Math.PI * this.oscillationFrequency;
-    if (this.oscillationAngle >= 2 * Math.PI) {
-      this.oscillationAngle -= 2 * Math.PI;
-    }
-
-    const dy = this.oscillationRadius * Math.cos(this.oscillationAngle);
-
-    this.move(new Vector(0, dy));
+    this.move(new Vector(0, this.oscillator.getDy()));
   }
 
   render(context: CanvasRenderingContext2D) {
