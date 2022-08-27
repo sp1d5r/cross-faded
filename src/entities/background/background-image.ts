@@ -1,12 +1,12 @@
-import { Entity } from "../entities";
 import { Vector } from "../../lib/vector";
+import { Entity } from "../entities";
 
-export class BackgroundImage extends Entity {
-  private image: HTMLImageElement;
+export abstract class BackgroundImage extends Entity {
+  protected image: HTMLImageElement;
 
-  private position: Vector = null;
-  private speed: Vector;
-  private dimensions: Vector;
+  protected position: Vector | null = null;
+  protected speed: Vector;
+  protected dimensions: Vector;
 
   constructor(url: string, speed: Vector, dimensions: Vector) {
     super();
@@ -35,23 +35,5 @@ export class BackgroundImage extends Entity {
 
   getPosition() {
     return this.position;
-  }
-
-  update(): void {
-    if (this.position === null) return;
-    // throw new Error("Update called before image loaded");
-    this.position.add(this.speed);
-  }
-
-  render(context: CanvasRenderingContext2D): void {
-    if (this.position === null) return;
-    // throw new Error("Update called before image loaded");
-    context.drawImage(
-      this.image,
-      this.position.getX(),
-      this.position.getY(),
-      this.dimensions.getX(),
-      this.dimensions.getY()
-    );
   }
 }
