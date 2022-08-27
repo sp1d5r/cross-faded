@@ -20,19 +20,23 @@ export class Player extends Entity {
 
     this.oscillationAngle = 0;
     this.oscillationFrequency = 1 / 20;
-    this.oscillationRadius = 10;
+    this.oscillationRadius = 5;
   }
 
-  getY():number{
+  getY(): number {
     return this.position.getY();
   }
 
-  getX():number{
+  getX(): number {
     return this.position.getX();
   }
 
   getRadius(): number {
     return this.radius;
+  }
+
+  move(vector: Vector) {
+    this.position.add(vector);
   }
 
   /* Update and Render */
@@ -48,7 +52,7 @@ export class Player extends Entity {
 
     const dy = this.oscillationRadius * Math.cos(this.oscillationAngle);
 
-    this.position.add(new Vector(0, dy));
+    this.move(new Vector(0, dy));
   }
 
   render(context: CanvasRenderingContext2D) {
