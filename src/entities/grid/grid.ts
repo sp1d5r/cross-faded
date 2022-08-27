@@ -31,7 +31,7 @@ export class Grid extends Entity {
     console.log(gridWidth);
     let xPosition = this.canvasWidth;
     for (let cols = 0; cols < gridWidth; cols++) {
-      this.appendColumn(xPosition);
+      this._appendColumn(xPosition);
       xPosition = xPosition + (this.blockSize + 2);
     }
   }
@@ -47,7 +47,7 @@ export class Grid extends Entity {
   }
 
   /* Column manipulation */
-  appendColumn(xPosition?: number) {
+  _appendColumn(xPosition?: number) {
     let x_pos = typeof xPosition === undefined ? this.canvasWidth : xPosition;
     /* Add columns to the back of the grid */
     let y_pos = 0;
@@ -62,12 +62,6 @@ export class Grid extends Entity {
     }
     tempCols.push(rows);
     this.columns = tempCols;
-  }
-
-  removeColumn() {
-    /* Remove columns from the front of the grid */
-    let [first, ...rest] = this.columns;
-    this.columns = rest;
   }
 
   _calcDist(x1: number, x2: number, y1: number, y2: number): number {
