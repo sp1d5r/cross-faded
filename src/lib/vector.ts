@@ -7,6 +7,10 @@ export class Vector {
     this.y = y;
   }
 
+  static copy(vector: Vector): Vector {
+    return new Vector(vector.x, vector.y);
+  }
+
   public add(vector: Vector): Vector {
     this.x += vector.x;
     this.y += vector.y;
@@ -19,11 +23,11 @@ export class Vector {
     return this;
   }
 
-  public getX() : number {
+  public getX(): number {
     return this.x;
   }
 
-  public getY() : number {
+  public getY(): number {
     return this.y;
   }
 }
