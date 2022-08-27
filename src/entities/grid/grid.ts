@@ -20,7 +20,6 @@ export class Grid extends Entity {
     this.canvasHeight = canvasHeight;
     this.canvasWidth = canvasWidth;
     this.initialseGrid();
-    this.appendColumn();
   }
 
   _getGridWidth(): number {
@@ -145,23 +144,15 @@ export class Grid extends Entity {
 
   update() {
     /* Update the elements in the grid */
-    for (var i = 0; i < this.columns.length; i++) {
-      let column = this.columns[i];
-      for (var j = 0; j < column.length; j++) {
-        /* For each Block */
-        let block = column[j];
-        block.update();
-      }
-    }
+    this.columns.forEach((col) => {
+      col.forEach((block) => block.update());
+    });
   }
 
   render(context: CanvasRenderingContext2D) {
     /* Render the changes made */
-    for (var i = 0; i < this.columns.length; i++) {
-      let column = this.columns[i];
-      for (var j = 0; j < column.length; j++) {
-        column[j].render(context);
-      }
-    }
+    this.columns.forEach((col) => {
+      col.forEach((block) => block.render(context));
+    });
   }
 }
