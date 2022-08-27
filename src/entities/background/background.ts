@@ -42,7 +42,7 @@ export class Background extends Entity {
       new RepeatingBackgroundImage(
         stars,
         new Vector(-0.5, 0),
-        new Vector(canvasWidth, canvasHeight / 4),
+        new Vector(canvasWidth / 1.5, canvasHeight / 4.5),
         new Vector(0, 10),
         canvasWidth
       ),
