@@ -19,6 +19,10 @@ if (context === null || root === null) {
 
 root.appendChild(canvas);
 
+export function isDev() {
+  return true;
+}
+
 class Game {
   start = new Date().getTime();
   player: Player = new Player();

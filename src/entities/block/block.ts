@@ -1,5 +1,6 @@
 import { Vector } from "../../lib/vector";
 import { Entity } from "../entities";
+import { isDev } from "../../main";
 
 export class Block extends Entity {
   private position: Vector;
@@ -56,15 +57,18 @@ export class Block extends Entity {
   }
 
   render(context: CanvasRenderingContext2D) {
-    /* Render the changes made */
-    context.fillStyle = this.active
-      ? "rgba(255,0,0,0.05)"
-      : "rgba(255,255,255, 0.05)";
-    context.fillRect(
-      this.position.getX(),
-      this.position.getY(),
-      this.size,
-      this.size
-    );
+    const condition = isDev() ? this.isActive() : true;
+    if (condition) {
+      /* Render the changes made */
+      context.fillStyle = this.active
+        ? "rgba(255,0,0,0.05)"
+        : "rgba(255,255,255, 0.05)";
+      context.fillRect(
+        this.position.getX(),
+        this.position.getY(),
+        this.size,
+        this.size
+      );
+    }
   }
 }
