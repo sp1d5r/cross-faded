@@ -1,6 +1,7 @@
 import { Vector } from "../../lib/vector";
 import { Entity } from "../entities";
 import { isDev } from "../../main";
+import { Oscillator } from "../util/oscillator";
 
 export class Block extends Entity {
   private position: Vector;
@@ -8,6 +9,8 @@ export class Block extends Entity {
   private initialPosition: Vector;
   private active: boolean;
   private probability: number;
+
+  private alphaOscillator: Oscillator;
 
   constructor(x: number, y: number, size: number, canvasWidth: number) {
     super();
@@ -17,6 +20,12 @@ export class Block extends Entity {
     this.size = size;
     this.active = Math.floor(Math.random() * 100) < 2;
     this.probability = 2; /* % a tile becomes active*/
+
+    this.alphaOscillator = new Oscillator(
+      0.5,
+      1 / 80,
+      Math.random() * 2 * Math.PI
+    );
   }
 
   _initialseAgain(diff: number) {
@@ -54,15 +63,19 @@ export class Block extends Entity {
       /* Update the elements for the player */
       this.updatePosition(-4, 0);
     }
+
+    if (this.active) {
+      this.alphaOscillator.update();
+    }
   }
 
   render(context: CanvasRenderingContext2D) {
-    const condition = isDev() ? this.isActive() : true;
+    const condition = isDev() ? this.active : true;
     if (condition) {
       /* Render the changes made */
       context.fillStyle = this.active
-        ? "rgba(255,0,0,0.05)"
-        : "rgba(255,255,255, 0.05)";
+        ? `rgba(255,0,0,${0.5 + this.alphaOscillator.getDy()})`
+        : `rgba(255,255,255, 0.05)`;
       context.fillRect(
         this.position.getX(),
         this.position.getY(),
